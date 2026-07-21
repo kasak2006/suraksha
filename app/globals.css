@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Suraksha design tokens (§8 of the spec)
+   Calm, official, sunlight-readable. Single light theme by design:
+   the target user is outdoors on a low-end screen, often panicking.
+   ------------------------------------------------------------------ */
+:root {
+  /* Base palette */
+  --background: #faf8f3; /* warm off-white */
+  --foreground: #1c2342; /* deep indigo ink */
+  --card: #ffffff;
+  --card-foreground: #1c2342;
+  --muted: #efece3;
+  --muted-foreground: #545b73;
+  --primary: #27346b; /* trust indigo — primary actions, links, focus */
+  --primary-foreground: #ffffff;
+  --accent: #e8890c; /* saffron — the single action accent */
+  --accent-foreground: #241a03;
+  --border: #e2ddd1;
+  --input: #b9b2a2;
+  --ring: #27346b;
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+  --radius: 0.75rem;
+
+  /* Verdict bands (§4.4) — semantic ONLY, never decorative (§8).
+     Enforced by lint: usable only inside verdict UI, see eslint.config.mjs */
+  --verdict-safe: #1a7f37;
+  --verdict-safe-foreground: #ffffff;
+  --verdict-safe-surface: #e6f4ea;
+  --verdict-safe-border: #a9d8b8;
+  --verdict-caution: #9a6700;
+  --verdict-caution-foreground: #ffffff;
+  --verdict-caution-surface: #fff3d1;
+  --verdict-caution-border: #e5cd8b;
+  --verdict-risky: #bc4c00;
+  --verdict-risky-foreground: #ffffff;
+  --verdict-risky-surface: #ffe9db;
+  --verdict-risky-border: #f3c1a0;
+  --verdict-danger: #b3261e;
+  --verdict-danger-foreground: #ffffff;
+  --verdict-danger-surface: #fbe9e7;
+  --verdict-danger-border: #f0b4af;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-verdict-safe: var(--verdict-safe);
+  --color-verdict-safe-foreground: var(--verdict-safe-foreground);
+  --color-verdict-safe-surface: var(--verdict-safe-surface);
+  --color-verdict-safe-border: var(--verdict-safe-border);
+  --color-verdict-caution: var(--verdict-caution);
+  --color-verdict-caution-foreground: var(--verdict-caution-foreground);
+  --color-verdict-caution-surface: var(--verdict-caution-surface);
+  --color-verdict-caution-border: var(--verdict-caution-border);
+  --color-verdict-risky: var(--verdict-risky);
+  --color-verdict-risky-foreground: var(--verdict-risky-foreground);
+  --color-verdict-risky-surface: var(--verdict-risky-surface);
+  --color-verdict-risky-border: var(--verdict-risky-border);
+  --color-verdict-danger: var(--verdict-danger);
+  --color-verdict-danger-foreground: var(--verdict-danger-foreground);
+  --color-verdict-danger-surface: var(--verdict-danger-surface);
+  --color-verdict-danger-border: var(--verdict-danger-border);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 0.25rem);
+  --radius-sm: calc(var(--radius) - 0.5rem);
+
+  /* Latin first, then Indic scripts — each font only covers its own script,
+     so the browser falls through per glyph */
+  --font-sans: var(--font-latin), var(--font-gujarati), var(--font-devanagari),
+    system-ui, sans-serif;
+}
+
+/* 18px base (§5.8 accessibility) — everything rem-based scales with it,
+   which also enlarges spacing/touch targets on the default scale */
+html {
+  font-size: 18px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Minimal, purposeful motion (§8) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

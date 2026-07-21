@@ -1,0 +1,19 @@
+{
+  "_comment": "Registrable domains of legitimate Indian bank/govt/payment/telecom services. Seed list — grow toward ~120 entries during Phase 2 (spec §4.2). Every entry must be verified before shipping (spec §9.7).",
+  "domains": [
+    "sbi.co.in", "onlinesbi.sbi", "sbicard.com", "yonobusiness.sbi",
+    "icicibank.com", "hdfcbank.com", "axisbank.com", "kotak.com",
+    "pnbindia.in", "bankofbaroda.in", "unionbankofindia.co.in",
+    "canarabank.com", "indianbank.in", "idbibank.in", "yesbank.in",
+    "indusind.com", "aubank.in", "federalbank.co.in", "rblbank.com",
+    "idfcfirstbank.com", "bandhanbank.com", "csb.co.in",
+    "rbi.org.in", "npci.org.in", "sebi.gov.in", "trai.gov.in",
+    "uidai.gov.in", "incometax.gov.in", "epfindia.gov.in",
+    "cybercrime.gov.in", "india.gov.in", "mygov.in", "digilocker.gov.in",
+    "indiapost.gov.in", "irctc.co.in", "nsdl.co.in", "cdslindia.com",
+    "phonepe.com", "paytm.com", "paytmbank.com", "google.com",
+    "bhimupi.org.in", "mobikwik.com", "freecharge.in",
+    "airtel.in", "jio.com", "myvi.in", "bsnl.co.in",
+    "amazon.in", "flipkart.com", "whatsapp.com"
+  ]
+}

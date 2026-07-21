@@ -1,0 +1,111 @@
+{
+  "app": {
+    "name": "Suraksha",
+    "tagline": "Check a suspicious message before you trust it"
+  },
+  "languages": {
+    "gu": "ગુજરાતી",
+    "hi": "हिन्दी",
+    "en": "English",
+    "switchLabel": "Change language"
+  },
+  "layout": {
+    "skipToContent": "Skip to main content"
+  },
+  "footer": {
+    "disclaimer": "Suraksha is a safety assistant, not a guarantee. If you are unsure, call your bank's official number — from your passbook or your branch — never a number from the message."
+  },
+  "home": {
+    "heading": "Got a suspicious message?",
+    "subheading": "Paste it here. Suraksha will tell you if it is a scam — and why.",
+    "inputLabel": "The message you received",
+    "placeholder": "Paste the SMS, WhatsApp message or link here…",
+    "paste": "Paste",
+    "check": "Check it",
+    "emptyError": "Paste or type a message first.",
+    "tilesLabel": "What did you get?",
+    "tiles": {
+      "message": "Message",
+      "call": "Call",
+      "upi": "UPI request",
+      "link": "Link"
+    },
+    "examplesLabel": "Or try an example",
+    "examples": {
+      "gu": "Fake KYC SMS (Gujarati)",
+      "hi": "Lottery prize scam (Hindi)",
+      "en": "Loan advance-fee scam (English)"
+    }
+  },
+  "check": {
+    "backToHome": "Check another message",
+    "analysing": "Checking…",
+    "yourMessage": "The message you checked",
+    "whyHeading": "Why we say this",
+    "noReasons": "No known scam signals were found. Stay careful — a clean check is not a guarantee.",
+    "scoreLabel": "Risk score",
+    "overrideNote": "One signal here is dangerous on its own, so the verdict is raised regardless of the rest.",
+    "emptyState": "No message to check. Go back and paste one.",
+    "bands": {
+      "safe": "Looks safe",
+      "caution": "Be careful",
+      "risky": "Risky",
+      "danger": "Danger"
+    },
+    "verdictLine": {
+      "safe": "No scam signals found — but always stay alert.",
+      "caution": "Some warning signs. Do not act in a hurry; verify first.",
+      "risky": "Several scam signs. Treat this as a scam until you have verified it.",
+      "danger": "This is a scam. Do not share any code, do not pay, do not install anything."
+    }
+  },
+  "reasons": {
+    "credential": {
+      "secretAsk": "It asks for your OTP, PIN or password. No bank, wallet or official ever asks for these — anyone who does is stealing.",
+      "remoteAccess": "It mentions a screen-sharing app like AnyDesk or TeamViewer. Scammers use these to watch your phone and empty your account.",
+      "installApp": "It tells you to install an app or switch on special permissions. This is how scammers take control of phones."
+    },
+    "upi": {
+      "collectToReceive": "It says entering your UPI PIN or approving a request will bring you money. Your PIN only ever sends money OUT — receiving needs nothing.",
+      "qrReceive": "It asks you to scan a QR code to receive money. Receiving money never needs a QR scan.",
+      "wrongTransferReturn": "It claims money reached you by mistake and asks you to send it back. This is a known trap — check your own bank app, then talk to your branch.",
+      "refundBait": "It dangles a refund or cashback out of nowhere. Fake refunds are used to make you approve payments.",
+      "unusualVpa": "The UPI ID uses an uncommon provider. Check the receiver's name in your UPI app before paying anything."
+    },
+    "url": {
+      "apkDownload": "It links to an app file (APK/EXE) download. Apps from links can watch your screen and empty your account — install only from the Play Store.",
+      "lookalikeDomain": "The website address imitates a real bank or service, but it is not the official address.",
+      "punycodeHomoglyph": "The link uses look-alike characters to disguise a fake website address.",
+      "shortener": "The link is shortened, hiding where it really leads. Banks and offices do not send shortened links.",
+      "ipAddress": "The link points to a raw number address instead of a real website name. No bank does this.",
+      "suspiciousTld": "The website ends in a cheap domain that fraudsters commonly use.",
+      "httpBank": "A link about banking is not using a secure (https) address. Real bank sites are always secure.",
+      "govClaimNonGov": "It talks about a government scheme, but the link is not a government (.gov.in) website.",
+      "excessiveSubdomains": "The web address is stretched with many extra parts to look official. Genuine addresses are short."
+    },
+    "loan": {
+      "advanceFee": "It asks for a fee, GST or deposit before giving the loan. Real lenders take charges from the loan amount — never pay money to get a loan.",
+      "tooEasy": "It promises a loan with no documents, no credit check or 'guaranteed' approval. Real loans always need checks; this is bait.",
+      "rbiClaim": "It claims to be 'RBI approved'. The RBI does not approve individual lenders — check the lender on the RBI website's NBFC list."
+    },
+    "impersonation": {
+      "authorityClaim": "It claims to be from a bank, the police, RBI, income tax or a courier. Anyone can say this on a call — verify through an official number, not this message.",
+      "digitalArrest": "It threatens arrest, a warrant or a seized parcel to frighten you. This is the 'digital arrest' scam — the police never arrest or take payment over a call.",
+      "senderIdMismatch": "It claims to be your bank but gives a personal 10-digit mobile number. Real bank messages never ask you to call a personal number."
+    },
+    "urgency": {
+      "deadline": "It creates a rush — 'act now', 'within hours', 'account blocked today'. This pressure is meant to stop you thinking. Slow down and verify.",
+      "secrecy": "It tells you to keep this secret from family or bank staff. Honest institutions never ask for secrecy — this is how victims are cut off from help."
+    },
+    "reward": {
+      "lotteryPrize": "It says you won a lottery, prize or lucky draw you never entered. Real prizes never need you to pay or share details to claim.",
+      "jobUpfront": "It offers easy earnings but asks for a registration or joining fee first. Real jobs pay you — they never ask you to pay to start.",
+      "investment": "It promises guaranteed profit or doubled money. No real investment is guaranteed; 'sure profit' offers are traps."
+    },
+    "textual": {
+      "excessiveCaps": "The message is mostly in capital letters to shout and rush you. Genuine messages rarely do this.",
+      "charSubstitution": "Words like 'account' or 'OTP' are spelled with digits or symbols to slip past filters — a common scam trick.",
+      "homoglyphWord": "A word uses look-alike letters from another alphabet to disguise itself. This is deliberate trickery."
+    }
+  }
+}
