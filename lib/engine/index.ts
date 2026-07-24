@@ -132,7 +132,10 @@ export async function analyzeWithModel(text: string): Promise<AnalysisResult> {
     pScam,
     ruleScore: rawRuleScore,
     tacticPeak: 0,
-    overrideBand: evaluation.overridden ? evaluation.band : undefined,
+    // The hard-override floor must hold even when it didn't change the
+    // rules-only verdict — otherwise fusion could talk an explicit OTP/PIN ask
+    // down out of DANGER.
+    overrideBand: evaluation.overrideBand,
   });
 
   return {

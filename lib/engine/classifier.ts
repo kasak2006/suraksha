@@ -42,6 +42,20 @@ type Embedder = (
 const HEAD_URL = "/models/classifier-head.json";
 const DEFAULT_MODEL_ID = "Xenova/paraphrase-multilingual-MiniLM-L12-v2";
 
+/**
+ * The head records the model it was TRAINED with, which is the Python
+ * `sentence-transformers/…` repo. The browser needs the ONNX-converted mirror
+ * (the `Xenova/…` repo) — the same weights, just the runtime Transformers.js can
+ * load. Map one to the other so a head straight out of the notebook works.
+ */
+function resolveEncoderId(modelId: string): string {
+  if (modelId.startsWith("Xenova/")) return modelId;
+  if (modelId.startsWith("sentence-transformers/")) {
+    return modelId.replace("sentence-transformers/", "Xenova/");
+  }
+  return DEFAULT_MODEL_ID;
+}
+
 let modelState: ModelState = "unloaded";
 let head: ClassifierHead | null = null;
 let embedderPromise: Promise<Embedder> | null = null;
@@ -144,7 +158,7 @@ function ensureReady(): Promise<boolean> {
       }
       head = loaded;
       try {
-        await getEmbedder(loaded.model_id || DEFAULT_MODEL_ID);
+        await getEmbedder(resolveEncoderId(loaded.model_id));
         modelState = "ready";
         return true;
       } catch {
@@ -164,7 +178,7 @@ export async function classify(text: string): Promise<number | null> {
   const ready = await ensureReady();
   if (!ready || !head) return null;
   try {
-    const embedder = await getEmbedder(head.model_id || DEFAULT_MODEL_ID);
+    const embedder = await getEmbedder(resolveEncoderId(head.model_id));
     const output = await embedder(text, {
       pooling: "mean",
       normalize: head.normalize_embeddings,

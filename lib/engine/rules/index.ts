@@ -52,13 +52,28 @@ export function evaluateRules(
   );
   const scoreBand = scoreToBand(rawScore);
 
-  let band: VerdictBand = scoreBand;
+  // The override floor from every matched hard-override rule, tracked separately
+  // so it can survive neural fusion even when it didn't move the rules verdict.
+  let overrideBand: VerdictBand | undefined;
   for (const match of matches) {
-    if (match.override !== undefined) band = maxBand(band, match.override);
+    if (match.override !== undefined) {
+      overrideBand = overrideBand
+        ? maxBand(overrideBand, match.override)
+        : match.override;
+    }
   }
 
+  const band: VerdictBand = overrideBand
+    ? maxBand(scoreBand, overrideBand)
+    : scoreBand;
   const overridden = band !== scoreBand;
   const score = overridden ? Math.max(rawScore, bandFloor(band)) : rawScore;
 
-  return { score, band, matches, overridden };
+  return {
+    score,
+    band,
+    matches,
+    overridden,
+    ...(overrideBand !== undefined && { overrideBand }),
+  };
 }

@@ -68,4 +68,11 @@ export interface RuleEvaluation {
   matches: RuleMatch[];
   /** True when a hard override raised the band above what the score alone gave. */
   overridden: boolean;
+  /**
+   * The most severe hard-override band among matched rules, if any — regardless
+   * of whether it changed the rules-only verdict. This is the floor that must
+   * survive neural fusion (an explicit credential ask stays DANGER even if the
+   * model pulls the weighted score down).
+   */
+  overrideBand?: VerdictBand;
 }
