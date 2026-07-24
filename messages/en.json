@@ -46,6 +46,12 @@
     "scoreLabel": "Risk score",
     "overrideNote": "One signal here is dangerous on its own, so the verdict is raised regardless of the rest.",
     "emptyState": "No message to check. Go back and paste one.",
+    "ai": {
+      "checking": "Running an extra AI check…",
+      "downloading": "Downloading the AI model once — after this it works offline.",
+      "ready": "AI check complete",
+      "rulesOnly": "Showing the quick rules-based check."
+    },
     "bands": {
       "safe": "Looks safe",
       "caution": "Be careful",

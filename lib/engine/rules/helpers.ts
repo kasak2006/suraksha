@@ -27,7 +27,14 @@ export function findAll(pattern: RegExp, text: string): EvidenceSpan[] {
 
 /** First match of any pattern inside a window of text, or null. */
 export function firstIn(patterns: readonly RegExp[], text: string): boolean {
-  return patterns.some((p) => p.test(text));
+  return patterns.some((p) => {
+    // `.test()` on a global/sticky pattern advances lastIndex, so a module-level
+    // pattern reused across analyses would resume mid-string and miss matches.
+    // Reset first so detection is idempotent (a /check runs the engine twice:
+    // once synchronously, once inside analyzeWithModel).
+    p.lastIndex = 0;
+    return p.test(text);
+  });
 }
 
 /** The ±window characters of raw text around a span. */

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { analyze } from "@/lib/engine";
+import { analyze, analyzeWithModel } from "@/lib/engine";
 
 describe("analyze — public API", () => {
   test("returns a danger verdict with reasons and highlighted segments", () => {
@@ -33,5 +33,42 @@ describe("analyze — public API", () => {
     const r = analyze("");
     expect(r.band).toBe("safe");
     expect(r.segments).toHaveLength(0);
+  });
+
+  test("synchronous analyze reports a model state and no pScam", () => {
+    const r = analyze("Let us meet for tea at 5pm tomorrow.");
+    expect(["unloaded", "loading", "ready", "failed"]).toContain(r.modelState);
+    expect(r.pScam).toBeUndefined();
+  });
+
+  test("repeated analyses of the same text are identical (no leaked regex state)", () => {
+    const text = "Share your OTP now to unblock your account";
+    const first = analyze(text);
+    const second = analyze(text);
+    const third = analyze(text);
+    expect(first.band).toBe("danger");
+    expect(second.band).toBe("danger");
+    expect(third.band).toBe("danger");
+    expect(second.score).toBe(first.score);
+    expect(third.score).toBe(first.score);
+  });
+});
+
+describe("analyzeWithModel — degrades to rules-only when the model is absent", () => {
+  test("returns the rules verdict with modelState 'failed' and no pScam", async () => {
+    const text = "Share your OTP now to unblock your account";
+    const rulesOnly = analyze(text);
+    const withModel = await analyzeWithModel(text);
+
+    // No /models/classifier-head.json in the test env → rules-only fallback.
+    expect(withModel.modelState).toBe("failed");
+    expect(withModel.pScam).toBeUndefined();
+    // The verdict is exactly the deterministic one, untouched by fusion.
+    expect(withModel.band).toBe(rulesOnly.band);
+    expect(withModel.score).toBe(rulesOnly.score);
+    expect(withModel.reasons.map((r) => r.ruleId)).toEqual(
+      rulesOnly.reasons.map((r) => r.ruleId),
+    );
+    expect(withModel.segments.map((s) => s.text).join("")).toBe(text);
   });
 });

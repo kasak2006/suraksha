@@ -1,14 +1,14 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { EvidenceHighlighter } from "@/components/verdict/EvidenceHighlighter";
 import { VerdictCard } from "@/components/verdict/VerdictCard";
 import { WhyList } from "@/components/verdict/WhyList";
 import { Button } from "@/components/ui/button";
-import { analyze } from "@/lib/engine";
+import { analyze, analyzeWithModel, type AnalysisResult } from "@/lib/engine";
 import { decodeMessage } from "@/lib/check-link";
 import { Link } from "@/lib/i18n/navigation";
 
@@ -18,7 +18,33 @@ export function CheckClient() {
   const encoded = searchParams.get("q") ?? "";
 
   const message = useMemo(() => decodeMessage(encoded), [encoded]);
-  const result = useMemo(() => analyze(message), [message]);
+  const rulesResult = useMemo(() => analyze(message), [message]);
+
+  // Rules render instantly; the neural check refines the same shape when ready.
+  const [refined, setRefined] = useState<AnalysisResult | null>(null);
+  const [aiState, setAiState] =
+    useState<AnalysisResult["modelState"]>("unloaded");
+
+  useEffect(() => {
+    setRefined(null);
+    if (message.trim().length === 0) {
+      setAiState("unloaded");
+      return;
+    }
+    let active = true;
+    setAiState("loading");
+    void analyzeWithModel(message).then((res) => {
+      if (!active) return;
+      setAiState(res.modelState);
+      // Only replace the verdict when the model actually scored.
+      if (res.modelState === "ready") setRefined(res);
+    });
+    return () => {
+      active = false;
+    };
+  }, [message]);
+
+  const result = refined ?? rulesResult;
 
   const backButton = (
     <Button asChild variant="outline">
@@ -45,6 +71,24 @@ export function CheckClient() {
         score={result.score}
         overridden={result.overridden}
       />
+
+      {aiState === "loading" && (
+        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Loader2 aria-hidden className="size-4 animate-spin" />
+          <span>
+            {t("ai.checking")} {t("ai.downloading")}
+          </span>
+        </p>
+      )}
+      {aiState === "ready" && (
+        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Sparkles aria-hidden className="size-4" />
+          <span>{t("ai.ready")}</span>
+        </p>
+      )}
+      {aiState === "failed" && (
+        <p className="text-sm text-muted-foreground">{t("ai.rulesOnly")}</p>
+      )}
 
       <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold">{t("yourMessage")}</h2>
