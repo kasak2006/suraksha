@@ -1,19 +1,24 @@
 "use client";
 
-import { ArrowLeft, Loader2, Sparkles } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { ArrowLeft, Loader2, Sparkles, Volume2 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { ArchetypeCard } from "@/components/verdict/ArchetypeCard";
 import { EvidenceHighlighter } from "@/components/verdict/EvidenceHighlighter";
+import { TacticRadar } from "@/components/verdict/TacticRadar";
 import { VerdictCard } from "@/components/verdict/VerdictCard";
 import { WhyList } from "@/components/verdict/WhyList";
 import { Button } from "@/components/ui/button";
 import { analyze, analyzeWithModel, type AnalysisResult } from "@/lib/engine";
 import { decodeMessage } from "@/lib/check-link";
 import { Link } from "@/lib/i18n/navigation";
+import { cancelSpeech, speak } from "@/lib/speech/tts";
+import { useTtsAvailable } from "@/lib/speech/useTts";
 
 export function CheckClient() {
   const t = useTranslations("check");
+  const locale = useLocale();
   const searchParams = useSearchParams();
   const encoded = searchParams.get("q") ?? "";
 
@@ -24,6 +29,19 @@ export function CheckClient() {
   const [refined, setRefined] = useState<AnalysisResult | null>(null);
   const [aiState, setAiState] =
     useState<AnalysisResult["modelState"]>("unloaded");
+  // Voice UI appears only when a voice for this language is actually installed.
+  const canSpeak = useTtsAvailable(locale);
+
+  const spokenVerdict = `${t(`bands.${rulesResult.band}`)}. ${t(`verdictLine.${rulesResult.band}`)}`;
+
+  // Auto-read the verdict aloud (§5.2) — critical for low-literacy users.
+  useEffect(() => {
+    if (!canSpeak || message.trim().length === 0) return;
+    speak(spokenVerdict, locale);
+    return () => cancelSpeech();
+    // Read once per message; spokenVerdict/locale are derived from it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canSpeak, message]);
 
   useEffect(() => {
     setRefined(null);
@@ -90,6 +108,18 @@ export function CheckClient() {
         <p className="text-sm text-muted-foreground">{t("ai.rulesOnly")}</p>
       )}
 
+      {canSpeak && (
+        <Button
+          type="button"
+          variant="outline"
+          className="self-start"
+          onClick={() => speak(spokenVerdict, locale)}
+        >
+          <Volume2 aria-hidden />
+          {t("listen")}
+        </Button>
+      )}
+
       <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold">{t("yourMessage")}</h2>
         <EvidenceHighlighter segments={result.segments} />
@@ -105,6 +135,15 @@ export function CheckClient() {
           </p>
         )}
       </section>
+
+      {result.tactics && (result.tacticPeak ?? 0) > 0 && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-lg font-semibold">{t("tacticsHeading")}</h2>
+          <TacticRadar tactics={result.tactics} />
+        </section>
+      )}
+
+      {result.archetype && <ArchetypeCard archetype={result.archetype} />}
 
       {backButton}
     </div>

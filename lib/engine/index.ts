@@ -1,6 +1,8 @@
+import { matchArchetype, type ArchetypeMatch } from "./archetypes";
 import { clampScore, fuse } from "./calibration";
 import { classify, getModelState, type ModelState } from "./classifier";
 import { evaluateRules } from "./rules";
+import { scoreTactics, type TacticScores } from "./tactics";
 import type { EvidenceSpan, RuleEvaluation, VerdictBand } from "./types";
 
 /*
@@ -36,6 +38,12 @@ export interface AnalysisResult {
   modelState: ModelState;
   /** Neural scam probability 0–1, present only once the model has scored. */
   pScam?: number;
+  /** 8-axis manipulation-tactic scores 0–100 (§4.3), for the radar. */
+  tactics?: TacticScores;
+  /** The strongest tactic axis 0–100 — the value fused into the score. */
+  tacticPeak?: number;
+  /** Matched scam archetype (§4.3), or null when none is distinctive. */
+  archetype?: ArchetypeMatch | null;
 }
 
 /** Merge all evidence spans into non-overlapping, sorted ranges. */
@@ -73,11 +81,16 @@ function toSegments(raw: string, spans: EvidenceSpan[]): HighlightSegment[] {
   return segments;
 }
 
-/** Reasons (strongest-first) and evidence segments — shared by both entry points. */
+/**
+ * The deterministic, model-independent parts of a result: reasons, evidence
+ * segments, tactic scores and the archetype. Computed the same way on both the
+ * sync and async paths, so the radar and archetype render regardless of model
+ * state.
+ */
 function explain(
   text: string,
   evaluation: RuleEvaluation,
-): Pick<AnalysisResult, "reasons" | "segments"> {
+): Pick<AnalysisResult, "reasons" | "segments" | "tactics" | "tacticPeak" | "archetype"> {
   // Strongest signals first, so the "Why" list leads with what matters.
   const reasons = [...evaluation.matches]
     .sort((a, b) => b.weight - a.weight)
@@ -89,7 +102,16 @@ function explain(
     }));
 
   const allEvidence = evaluation.matches.flatMap((m) => m.evidence);
-  return { reasons, segments: toSegments(text, allEvidence) };
+  const tactics = scoreTactics(text, evaluation);
+  const archetype = matchArchetype(text, tactics.scores, evaluation);
+
+  return {
+    reasons,
+    segments: toSegments(text, allEvidence),
+    tactics: tactics.scores,
+    tacticPeak: tactics.peak,
+    archetype,
+  };
 }
 
 export function analyze(text: string): AnalysisResult {
@@ -131,7 +153,8 @@ export async function analyzeWithModel(text: string): Promise<AnalysisResult> {
   const fused = fuse({
     pScam,
     ruleScore: rawRuleScore,
-    tacticPeak: 0,
+    // Real tactic peak now feeds the 0.15-weighted third component (§4.4).
+    tacticPeak: shared.tacticPeak ?? 0,
     // The hard-override floor must hold even when it didn't change the
     // rules-only verdict — otherwise fusion could talk an explicit OTP/PIN ask
     // down out of DANGER.

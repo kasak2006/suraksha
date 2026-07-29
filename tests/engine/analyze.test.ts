@@ -52,6 +52,24 @@ describe("analyze — public API", () => {
     expect(second.score).toBe(first.score);
     expect(third.score).toBe(first.score);
   });
+
+  test("carries tactic scores and an archetype for a scam", () => {
+    const r = analyze(
+      "Dear customer, your SBI account will be blocked today as KYC is expired. Share the OTP.",
+    );
+    expect(r.tactics).toBeDefined();
+    expect(r.tacticPeak).toBeGreaterThan(0);
+    expect(r.archetype?.id).toBe("kyc-expiry");
+    // The tactic peak equals the strongest axis.
+    const max = Math.max(...Object.values(r.tactics ?? {}));
+    expect(r.tacticPeak).toBe(max);
+  });
+
+  test("a benign message has low tactics and no archetype", () => {
+    const r = analyze("Let us meet for tea at 5 pm tomorrow.");
+    expect(r.tacticPeak).toBeLessThan(40);
+    expect(r.archetype).toBeNull();
+  });
 });
 
 describe("analyzeWithModel — degrades to rules-only when the model is absent", () => {

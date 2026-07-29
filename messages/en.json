@@ -24,6 +24,9 @@
     "check": "Check it",
     "emptyError": "Paste or type a message first.",
     "tilesLabel": "What did you get?",
+    "speak": "Speak",
+    "listening": "Listening…",
+    "comingSoon": "Coming soon",
     "tiles": {
       "message": "Message",
       "call": "Call",
@@ -52,6 +55,11 @@
       "ready": "AI check complete",
       "rulesOnly": "Showing the quick rules-based check."
     },
+    "tacticsHeading": "What this message is doing to you",
+    "archetypeNextLabel": "What they will ask for next",
+    "archetypePlaybookLink": "See what to do now",
+    "listen": "Listen",
+    "stop": "Stop",
     "bands": {
       "safe": "Looks safe",
       "caution": "Be careful",
@@ -113,5 +121,174 @@
       "charSubstitution": "Words like 'account' or 'OTP' are spelled with digits or symbols to slip past filters — a common scam trick.",
       "homoglyphWord": "A word uses look-alike letters from another alphabet to disguise itself. This is deliberate trickery."
     }
+  },
+  "tactics": {
+    "urgency": "Urgency",
+    "authority": "False authority",
+    "fear": "Fear",
+    "reward": "Reward bait",
+    "secrecy": "Secrecy",
+    "credential": "Secret-info ask",
+    "trust": "Fake trust",
+    "irreversibility": "Irreversible payment"
+  },
+  "archetypes": {
+    "kyc-expiry": {
+      "name": "KYC expiry scam",
+      "summary": "A fake bank message says your KYC has expired and the account will be blocked unless you verify through their link.",
+      "nextStep": "Next they will ask for your OTP or card details, or push you to a fake login page."
+    },
+    "upi-collect": {
+      "name": "UPI collect-request trap",
+      "summary": "You are asked to approve a request or enter your UPI PIN to 'receive' money — but a PIN only ever sends money out.",
+      "nextStep": "Next they will send a collect request and rush you to approve it or enter your PIN."
+    },
+    "refund-reversal": {
+      "name": "Wrong-transfer refund scam",
+      "summary": "Someone claims they sent you money by mistake and begs you to return it, often after a fake credit SMS.",
+      "nextStep": "Next they will send a fake 'money received' message and press you to transfer it back."
+    },
+    "digital-arrest": {
+      "name": "Digital arrest scam",
+      "summary": "Fake police or CBI officers claim you are in a criminal case and keep you on call, isolated, to extract money.",
+      "nextStep": "Next they will demand secrecy, a video call, and a 'verification' transfer to clear your name."
+    },
+    "courier-parcel": {
+      "name": "Courier / parcel scam",
+      "summary": "A courier or customs 'officer' says a parcel in your name holds illegal items and you must pay to avoid arrest.",
+      "nextStep": "Next they will transfer you to a fake officer and demand a clearance or fine payment."
+    },
+    "electricity-bill": {
+      "name": "Electricity disconnection scam",
+      "summary": "A message threatens to cut your power tonight over an unpaid bill and tells you to call a number or pay now.",
+      "nextStep": "Next they will have you call an 'officer' or install an app to 'update' the bill."
+    },
+    "army-officer": {
+      "name": "Army-officer marketplace scam",
+      "summary": "A fake soldier on OLX or Quikr offers to pay in advance and sends a QR or request that actually takes your money.",
+      "nextStep": "Next they will send a QR code or collect request and ask you to scan or approve it."
+    },
+    "loan-advance-fee": {
+      "name": "Advance-fee loan scam",
+      "summary": "An instant loan with no documents is 'approved', but you must pay a processing or GST fee before it is released.",
+      "nextStep": "Next they will demand a processing, insurance, or GST fee before any money arrives."
+    },
+    "job-task": {
+      "name": "Job / task scam",
+      "summary": "An easy work-from-home job promises daily earnings but asks for a registration fee or prepaid tasks first.",
+      "nextStep": "Next they will ask you to recharge a 'task wallet' or pay a joining fee."
+    },
+    "lottery-prize": {
+      "name": "Lottery / prize scam",
+      "summary": "You have 'won' a lottery you never entered; to claim it you must pay a fee and share personal details.",
+      "nextStep": "Next they will ask for a processing fee and your bank or Aadhaar details."
+    },
+    "sim-swap": {
+      "name": "SIM / verification scam",
+      "summary": "Your SIM will be 'deactivated' unless you re-verify — really an attempt to take over your number and OTPs.",
+      "nextStep": "Next they will ask you to share the OTP or code sent to your phone."
+    },
+    "card-upgrade": {
+      "name": "Card upgrade / reward-points scam",
+      "summary": "A free card upgrade or expiring reward points lure you into sharing your card number, CVV and OTP.",
+      "nextStep": "Next they will ask for your card number, CVV, and the OTP to 'activate' it."
+    },
+    "investment-trading": {
+      "name": "Investment / trading scam",
+      "summary": "A tips group promises guaranteed or doubled returns to lure a deposit into a fake trading app.",
+      "nextStep": "Next they will ask you to deposit money into their app or wallet to start."
+    },
+    "qr-receive": {
+      "name": "QR-to-receive scam",
+      "summary": "You are told to scan a QR code to receive money — but scanning and entering a PIN pays money out.",
+      "nextStep": "Next they will send a QR code and ask you to scan it and enter your UPI PIN."
+    },
+    "phishing-link": {
+      "name": "Phishing link",
+      "summary": "A message urges you to click a link to verify, reactivate or secure your account on a fake page.",
+      "nextStep": "Next the fake page will ask for your login, card details, or OTP."
+    },
+    "other": {
+      "name": "Suspicious message",
+      "summary": "This message shows scam-like pressure but does not match a specific known pattern.",
+      "nextStep": "Be cautious and verify independently before acting."
+    }
+  },
+  "playbook": {
+    "backToCheck": "Back to check",
+    "title": "What to do now",
+    "intro": "Follow these steps in order. Tap each one when it is done.",
+    "readAloud": "Read the steps aloud",
+    "stop": "Stop",
+    "buckets": {
+      "rightNow": "Right now",
+      "next10Min": "In the next 10 minutes",
+      "ifMoneyGone": "If money already went"
+    },
+    "steps": {
+      "dontClick": "Do not click the link. Banks never ask you to update KYC through an SMS link.",
+      "doNotShare": "Do not share any OTP, PIN, CVV or password — no bank or official ever needs them.",
+      "doNotPay": "Do not pay, transfer, or approve any request right now.",
+      "doNotInstall": "Do not install any app they ask for (AnyDesk, TeamViewer, or similar).",
+      "hangUp": "Hang up or stop replying. A real official never rushes you or forbids you from telling family.",
+      "breatheVerify": "Pause and breathe. Pressure to act instantly is the scam — real institutions give you time.",
+      "pinInvariant": "Remember: entering your UPI PIN only sends money OUT. You never need a PIN, approval or QR scan to receive money.",
+      "refundTruth": "Never return money to a stranger. If a wrong amount really came in, your bank reverses it — you never handle it yourself.",
+      "digitalArrestTruth": "The police, CBI or courts never arrest you over a video call or ask for money to clear a case. This is always a scam.",
+      "loanTruth": "A genuine lender never asks for a fee before giving a loan. Any processing fee to release the amount is a scam.",
+      "lotteryTruth": "You cannot win a lottery you never entered, and no real prize needs a fee to release it.",
+      "callBankOfficial": "Call your bank on the number printed on your card or passbook — never a number from the message.",
+      "freezeCard": "Block or freeze your card and UPI in your official bank app.",
+      "changePin": "Change your UPI PIN and net-banking password.",
+      "checkStatement": "Check your account statement for any transaction you did not make.",
+      "call1930": "Call 1930, the National Cyber Crime Helpline, immediately — the first hour matters most.",
+      "goldenHour": "Report within the golden hour. Fast reporting can freeze the transfer and get your money back.",
+      "fileComplaint": "File a complaint at cybercrime.gov.in using the draft below.",
+      "informBank": "Tell your bank in writing to flag the fraudulent transaction."
+    },
+    "helpline": {
+      "call1930": "Call 1930",
+      "portal": "Open cybercrime.gov.in"
+    },
+    "complaint": {
+      "heading": "Ready-to-send complaint",
+      "intro": "Fill in what you know, then copy the complaint and send it at cybercrime.gov.in or your police station.",
+      "fields": {
+        "date": "Date you received it",
+        "amount": "Amount lost (Rs), if any",
+        "vpa": "UPI ID / account / number involved",
+        "message": "Paste the scam message"
+      },
+      "copy": "Copy complaint",
+      "copied": "Copied to clipboard",
+      "template": "To the Cyber Crime Cell,\n\nI wish to report a financial fraud of the type \"{archetype}\". On {date}, I received a fraudulent message attempting to cheat me.\n\nAmount involved: Rs {amount}\nSuspicious UPI ID / account / number: {vpa}\n\nThe message I received was:\n\"{message}\"\n\nPlease register my complaint and take necessary action. I am also reporting this on the 1930 helpline.\n\nRegards"
+    }
+  },
+  "link": {
+    "title": "Check a link",
+    "intro": "Paste a suspicious link, or the whole message, to check it for phishing.",
+    "inputLabel": "The link or message",
+    "placeholder": "https://…",
+    "check": "Check this link",
+    "tips": "Real banks use their own website and never ask you to log in through an SMS link. Watch for misspelled names, extra words, and odd endings like .xyz or .top."
+  },
+  "upi": {
+    "title": "Check a UPI request",
+    "intro": "Answer two questions to know whether a UPI request is safe.",
+    "q1": "What kind of request is it?",
+    "collect": "A request asking me to pay or approve",
+    "pay": "I am sending money to someone",
+    "q2": "Did someone tell you this request is to RECEIVE money?",
+    "yes": "Yes",
+    "no": "No",
+    "invariant": "Entering your UPI PIN always takes money OUT of your account. You never need a PIN, an approval, or a QR scan to receive money.",
+    "resultScam": "This is a scam. A collect request takes money FROM you when you approve it. Nobody who is sending you money needs you to approve or enter a PIN.",
+    "resultCollectCaution": "Careful: approving this request and entering your PIN will send money OUT. Only approve if you meant to pay someone you trust.",
+    "resultPay": "A pay request sends money out of your account. Approve only if you meant to pay this person.",
+    "explainerTitle": "Pay vs Collect",
+    "explainerPay": "Pay: you send money out. It needs your PIN.",
+    "explainerCollect": "Collect: someone asks you to pay them. Approving it also sends money out — never to receive.",
+    "checkMessagePrompt": "Have the full message?",
+    "checkMessageCta": "Check the message"
   }
 }
