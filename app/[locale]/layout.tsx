@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Inter, Noto_Sans_Devanagari, Noto_Sans_Gujarati } from "next/font/google";
 import { notFound } from "next/navigation";
+import { InstallPrompt } from "@/components/layout/InstallPrompt";
+import { ServiceWorkerRegister } from "@/components/layout/ServiceWorkerRegister";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { routing } from "@/lib/i18n/routing";
@@ -30,6 +32,11 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// Indigo status bar to match the app shell (spec §8) when installed as a PWA.
+export const viewport: Viewport = {
+  themeColor: "#27346b",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -40,6 +47,15 @@ export async function generateMetadata({
   return {
     title: t("name"),
     description: t("tagline"),
+    appleWebApp: {
+      capable: true,
+      title: t("name"),
+      statusBarStyle: "default",
+    },
+    icons: {
+      icon: "/icon.svg",
+      apple: "/icon.svg",
+    },
   };
 }
 
@@ -77,6 +93,8 @@ export default async function LocaleLayout({
             </main>
             <SiteFooter />
           </div>
+          <ServiceWorkerRegister />
+          <InstallPrompt />
         </NextIntlClientProvider>
       </body>
     </html>

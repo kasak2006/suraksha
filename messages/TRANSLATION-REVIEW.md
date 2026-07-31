@@ -24,3 +24,8 @@ every line").
 | `reasons.reward.*` (3 keys) | TODO(gu-review) | TODO(hi-review) | |
 | `reasons.textual.*` (3 keys) | TODO(gu-review) | TODO(hi-review) | |
 | `data/examples.ts` gu + hi scam texts | TODO(gu-review) | TODO(hi-review) | Seeded demo scams — must read like real Gujarati/Hindi scam SMS, not translations. |
+| `pwa.*` (5 keys) | TODO(gu-review) | TODO(hi-review) | Install/offline banners (Phase 4). |
+| `call.*` (~24 keys) | TODO(gu-review) | TODO(hi-review) | Call guard (Phase 4). `dangerWarning` is spoken aloud — must read naturally and calmly. `honestyNote` states the speakerphone constraint (§9). |
+| `learn.*` (~22 keys) | TODO(gu-review) | TODO(hi-review) | Drill UI (Phase 4). Non-shaming tone (§8): `wrong` must not scold. |
+| `lessons.*` (otp/receiveNoPin/checkLender, 8 keys) | TODO(gu-review) | TODO(hi-review) | TTS-read micro-lessons (Phase 4) — must sound natural spoken aloud. |
+| `data/drills.ts` gu + hi cards (`gu-d*`, `hi-d*`, 8 cards) | TODO(gu-review) | TODO(hi-review) | Authored drill cards — must read like real Gujarati/Hindi messages, not translations. |

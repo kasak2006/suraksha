@@ -19,7 +19,7 @@ import { createRecognizer, isSttSupported, type Recognizer } from "@/lib/speech/
 
 const TILES = [
   { id: "message", icon: MessageSquare, action: "focus" },
-  { id: "call", icon: Phone, action: "soon" },
+  { id: "call", icon: Phone, action: "/call" },
   { id: "upi", icon: QrCode, action: "/upi" },
   { id: "link", icon: Link2, action: "/link" },
 ] as const;
@@ -159,20 +159,6 @@ export function UniversalInput() {
                 >
                   {inner}
                 </button>
-              );
-            }
-            if (action === "soon") {
-              return (
-                <div
-                  key={id}
-                  aria-disabled
-                  className={`${base} opacity-60`}
-                >
-                  {inner}
-                  <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-                    {t("comingSoon")}
-                  </span>
-                </div>
               );
             }
             return (

@@ -1,0 +1,5 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suraksha">
+  <rect width="512" height="512" rx="112" fill="#27346b"/>
+  <path d="M256 96 L392 152 V268 C392 356 330 402 256 432 C182 402 120 356 120 268 V152 Z" fill="#faf8f3"/>
+  <path d="M206 258 L242 296 L318 208" stroke="#27346b" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

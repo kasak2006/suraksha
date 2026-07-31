@@ -290,5 +290,78 @@
     "explainerCollect": "Collect: someone asks you to pay them. Approving it also sends money out — never to receive.",
     "checkMessagePrompt": "Have the full message?",
     "checkMessageCta": "Check the message"
+  },
+  "learn": {
+    "nav": "Learn",
+    "title": "Scam or Safe?",
+    "intro": "Practise spotting scams. You get 10 messages — decide if each is a scam or safe. Suraksha gives you more of the kinds you find tricky.",
+    "start": "Start a round",
+    "playAgain": "Play again",
+    "safe": "Safe",
+    "scam": "Scam",
+    "correct": "Correct!",
+    "wrong": "Not quite",
+    "wasScam": "This was a SCAM.",
+    "wasSafe": "This was SAFE.",
+    "whyScamGeneric": "It uses pressure, a reward or a request for secret information to trick you.",
+    "whySafeGeneric": "This is a normal message. It does not ask for a PIN, OTP, payment or an app install.",
+    "next": "Next",
+    "finishRound": "See result",
+    "roundDone": "Round complete",
+    "shieldScore": "Shield score",
+    "streak": "Streak: {streak}",
+    "best": "Best: {best}",
+    "shareBadge": "Share",
+    "shareCopied": "Copied!",
+    "shareText": "I scored {score} on Suraksha's scam-awareness drills. Learn to spot scams too — stay safe!"
+  },
+  "lessons": {
+    "heading": "60-second lessons",
+    "listen": "Listen",
+    "otp": {
+      "title": "What is an OTP?",
+      "body": "An OTP is a one-time password sent to your phone to approve something YOU started. No bank, company or officer ever needs your OTP. Anyone who asks for it is trying to steal from you."
+    },
+    "receiveNoPin": {
+      "title": "Receiving money never needs a PIN",
+      "body": "Your UPI PIN only ever sends money OUT of your account. To receive money you do nothing — no PIN, no approval, no QR scan. If someone says 'enter your PIN to get money', it is a scam."
+    },
+    "checkLender": {
+      "title": "How to check if a lender is real",
+      "body": "A real lender never asks for a fee before giving a loan. Check the lender on the RBI website's list of registered NBFCs. 'No documents', 'guaranteed approval' and 'RBI approved' in a message are warning signs."
+    }
+  },
+  "call": {
+    "title": "Call guard",
+    "honestyNote": "The browser can't listen in on a phone call. Put the caller on speaker (or play a recording) so Suraksha can hear it, and watch the meter as they talk.",
+    "unsupported": "Live listening needs Chrome or Edge. On this browser, paste what the caller said or texted into Check instead.",
+    "goToCheck": "Go to Check",
+    "backToHome": "Back to home",
+    "start": "Start listening",
+    "resume": "Resume listening",
+    "stop": "Stop",
+    "reset": "Clear",
+    "checkFullMessage": "Check the full transcript",
+    "meterLabel": "Pressure meter",
+    "noTacticsYet": "No pressure tactics yet.",
+    "transcriptLabel": "Live transcript",
+    "transcriptEmpty": "The call will appear here as it is spoken…",
+    "bands": {
+      "safe": "Looks safe",
+      "caution": "Be careful",
+      "risky": "Risky",
+      "danger": "Danger"
+    },
+    "dangerTitle": "Hang up now",
+    "dangerWarning": "This is a scam call. Do not share any OTP or PIN, do not pay, and do not install anything. No real bank or officer works like this.",
+    "dangerAck": "I understand",
+    "viewPlaybook": "What to do now"
+  },
+  "pwa": {
+    "install": "Install",
+    "installPitch": "Install Suraksha on your phone — it opens like an app and works offline.",
+    "dismiss": "Not now",
+    "worksOffline": "Works offline",
+    "offline": "You're offline — Suraksha still works"
   }
 }

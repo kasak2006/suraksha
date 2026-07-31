@@ -50,7 +50,9 @@ const eslintConfig = [
   },
   {
     // Verdict UI allowlist — the only places verdict colors may appear.
-    files: ["components/verdict/**"],
+    // components/call is verdict UI too: the pressure meter and danger interrupt
+    // (spec §5.3) exist to show the live verdict band by colour.
+    files: ["components/verdict/**", "components/call/**"],
     rules: {
       "no-restricted-syntax": "off",
     },

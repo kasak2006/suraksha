@@ -1,0 +1,6 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suraksha">
+  <rect width="512" height="512" fill="#27346b"/>
+  <!-- Shield kept inside the maskable safe zone (~64% central) so launcher masks don't clip it. -->
+  <path d="M256 148 L344 184 V260 C344 317 304 347 256 366 C208 347 168 317 168 260 V184 Z" fill="#faf8f3"/>
+  <path d="M224 254 L247 278 L296 222" stroke="#27346b" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
