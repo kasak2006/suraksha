@@ -50,9 +50,10 @@ function clampRange(x: number): number {
  *
  * Scale fix flagged in Phase 1: all three components are normalised to the SAME
  * 0–100 scale *before* weighting — pScam arrives as 0–1, the rule and tactic
- * scores as 0–100. Weights start at [0.45, 0.40, 0.15] (neural / rules / tactic).
- * tacticPeak is stubbed at 0 until Phase 3, so pure fusion currently caps at
- * 0.45·100 + 0.40·100 = 85 (DANGER is still reachable when both agree strongly).
+ * scores as 0–100. Weights are [0.45, 0.40, 0.15] (neural / rules / tactic).
+ * All three are live: the real tacticPeak from scoreTactics() feeds the third
+ * term (analyzeWithModel), so pure fusion spans the full 0–100 range. Hard
+ * overrides (explicit OTP/PIN ask, APK link) still floor to DANGER regardless.
  */
 export const FUSION_WEIGHTS = {
   neural: 0.45,

@@ -137,9 +137,10 @@ Three misclassified rows in the 44-row test set:
 - **Adversarial evasion.** A determined scammer can paraphrase around both the
   rules and a small embedding model. The tactic engine (Phase 3) and a growing
   corpus are the mitigations.
-- **Fusion cap.** With the tactic-peak component stubbed at 0 (Phase 3), pure
-  fusion tops out at 85/100; hard overrides (explicit OTP/PIN ask, APK link)
-  still floor to DANGER regardless of the model.
+- **Fusion.** All three components are live — neural (0.45), rules (0.40), and
+  the real tactic-peak (0.15) — so the fused score spans the full 0–100 range.
+  Hard overrides (explicit OTP/PIN ask, APK link) floor to DANGER regardless of
+  the model.
 
 ---
 
