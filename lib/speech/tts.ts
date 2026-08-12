@@ -49,10 +49,37 @@ function pickVoice(lang: string): SpeechSynthesisVoice | null {
   );
 }
 
+/** Lifecycle callbacks so callers can reflect play/stop state in the UI. */
+export interface SpeakHandlers {
+  onStart?: () => void;
+  /** Fires when speech ends — naturally, on error, or when superseded. */
+  onEnd?: () => void;
+}
+
+/*
+ * The utterance currently owned by speak(). We strip its handlers before
+ * cancelling or replacing it, so a superseded utterance's `end` event can never
+ * fire a stale onEnd and, say, flip a Stop button back to Listen mid-speech.
+ */
+let current: SpeechSynthesisUtterance | null = null;
+
+function detachCurrent(): void {
+  if (!current) return;
+  current.onstart = null;
+  current.onend = null;
+  current.onerror = null;
+  current = null;
+}
+
 /** Speak `text` in the given app locale. Cancels anything already speaking. */
-export function speak(text: string, locale: string): void {
+export function speak(
+  text: string,
+  locale: string,
+  handlers?: SpeakHandlers,
+): void {
   if (!isTtsSupported() || text.trim().length === 0) return;
   const synth = window.speechSynthesis;
+  detachCurrent();
   synth.cancel();
 
   const utterance = new SpeechSynthesisUtterance(text);
@@ -60,9 +87,20 @@ export function speak(text: string, locale: string): void {
   const voice = pickVoice(utterance.lang);
   if (voice) utterance.voice = voice;
   utterance.rate = 0.95;
+  if (handlers?.onStart) utterance.onstart = handlers.onStart;
+  const finish = () => {
+    if (current === utterance) current = null;
+    handlers?.onEnd?.();
+  };
+  utterance.onend = finish;
+  utterance.onerror = finish;
+  current = utterance;
   synth.speak(utterance);
 }
 
+/** Stop any current speech. Does not invoke the caller's onEnd handler. */
 export function cancelSpeech(): void {
-  if (isTtsSupported()) window.speechSynthesis.cancel();
+  if (!isTtsSupported()) return;
+  detachCurrent();
+  window.speechSynthesis.cancel();
 }

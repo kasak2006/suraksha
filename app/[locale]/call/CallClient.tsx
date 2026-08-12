@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Info, Mic, Square } from "lucide-react";
+import { ArrowLeft, FileAudio, Info, Loader2, Mic, Square, Upload } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DangerInterrupt } from "@/components/call/DangerInterrupt";
@@ -11,13 +11,22 @@ import { analyze } from "@/lib/engine";
 import { encodeMessage } from "@/lib/check-link";
 import { Link } from "@/lib/i18n/navigation";
 import { createRecognizer, isSttSupported, type Recognizer } from "@/lib/speech/stt";
+import {
+  isTranscriptionSupported,
+  transcribeFile,
+  type TranscribeFailure,
+} from "@/lib/speech/transcribe";
 
 /*
  * /call — the live call guard (spec §5.3). The browser cannot tap a phone call
- * (§9.1), so this is speakerphone-mode assistance: it listens through the mic,
- * transcribes continuously, and re-runs the deterministic rule engine on the
- * growing transcript to drive a pressure meter and a DANGER interrupt. We use
- * the sync `analyze` (not the neural path) so updates stay instant.
+ * (§9.1), so this is speakerphone-mode assistance. Two ways in, both on-device:
+ *  - LIVE: listen through the mic (Web Speech API) and transcribe continuously.
+ *  - RECORDING: upload a saved audio file, transcribed on-device with Whisper
+ *    (lib/speech/transcribe.ts) — this also works on Firefox/Safari, which have
+ *    no live Web Speech API.
+ * Either way the growing transcript re-runs the deterministic rule engine to
+ * drive a pressure meter and a DANGER interrupt. We use the sync `analyze` (not
+ * the neural path) so updates stay instant.
  */
 export function CallClient() {
   const t = useTranslations("call");
@@ -29,6 +38,14 @@ export function CallClient() {
   const [mounted, setMounted] = useState(false);
   const [dangerDismissed, setDangerDismissed] = useState(false);
   const recognizerRef = useRef<Recognizer | null>(null);
+
+  // Audio-file transcription (on-device Whisper).
+  const [transcribing, setTranscribing] = useState(false);
+  const [downloadPercent, setDownloadPercent] = useState<number | null>(null);
+  const [transcribeError, setTranscribeError] = useState<TranscribeFailure | null>(
+    null,
+  );
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -46,6 +63,10 @@ export function CallClient() {
   }, [result.band]);
 
   const showInterrupt = result.band === "danger" && !dangerDismissed;
+
+  // Capability flags are computed after mount to avoid an SSR/client mismatch.
+  const sttSupported = mounted && isSttSupported();
+  const uploadSupported = mounted && isTranscriptionSupported();
 
   function start() {
     const recognizer = createRecognizer({
@@ -78,6 +99,40 @@ export function CallClient() {
     setFinalText("");
     setInterimText("");
     setDangerDismissed(false);
+    setTranscribeError(null);
+  }
+
+  // Each failure reason maps to its own message key under call.errors.*.
+  const errorKey: Record<TranscribeFailure, string> = {
+    unsupported: "errors.unsupported",
+    decode: "errors.decode",
+    model: "errors.model",
+    empty: "errors.empty",
+  };
+
+  async function handleFile(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    // Clear the value so picking the same file again still fires onChange.
+    event.target.value = "";
+    if (!file) return;
+
+    stop(); // a recording and the live mic shouldn't run at once
+    setTranscribeError(null);
+    setDownloadPercent(null);
+    setTranscribing(true);
+
+    const result = await transcribeFile(file, locale, (p) =>
+      setDownloadPercent(p.percent),
+    );
+
+    setTranscribing(false);
+    setDownloadPercent(null);
+    if (result.ok) {
+      setFinalText((prev) => `${prev} ${result.text}`.trim());
+      setInterimText("");
+    } else {
+      setTranscribeError(result.reason);
+    }
   }
 
   const backButton = (
@@ -89,9 +144,55 @@ export function CallClient() {
     </Button>
   );
 
-  // Browsers without the Web Speech API (Firefox/Safari): be honest and offer
-  // the paste-into-Check fallback instead of a dead button.
-  if (mounted && !isSttSupported()) {
+  const uploadSection = uploadSupported && (
+    <div className="flex flex-col gap-2">
+      <p className="text-base font-semibold">{t("uploadTitle")}</p>
+      <p className="text-sm leading-relaxed text-muted-foreground">
+        {t("uploadHint")}
+      </p>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="audio/*"
+        className="sr-only"
+        onChange={handleFile}
+      />
+      <Button
+        type="button"
+        variant="outline"
+        size="lg"
+        className="self-start"
+        disabled={transcribing}
+        onClick={() => fileInputRef.current?.click()}
+      >
+        {transcribing ? (
+          <Loader2 aria-hidden className="animate-spin" />
+        ) : (
+          <Upload aria-hidden />
+        )}
+        {transcribing ? t("transcribing") : t("upload")}
+      </Button>
+      {transcribing && (
+        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+          <FileAudio aria-hidden className="size-4" />
+          <span>
+            {downloadPercent !== null
+              ? t("downloadingModel", { percent: downloadPercent })
+              : t("transcribingHint")}
+          </span>
+        </p>
+      )}
+      {transcribeError && (
+        <p className="text-sm font-medium text-destructive">
+          {t(errorKey[transcribeError])}
+        </p>
+      )}
+    </div>
+  );
+
+  // Neither live listening nor on-device transcription is available (e.g. an old
+  // browser): be honest and offer the paste-into-Check fallback.
+  if (mounted && !sttSupported && !uploadSupported) {
     return (
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-6 px-4 py-8">
         <h1 className="text-2xl font-bold">{t("title")}</h1>
@@ -116,24 +217,36 @@ export function CallClient() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-3">
-        {listening ? (
-          <Button type="button" variant="destructive" size="lg" onClick={stop}>
-            <Square aria-hidden />
-            {t("stop")}
-          </Button>
-        ) : (
-          <Button type="button" variant="accent" size="lg" onClick={start}>
-            <Mic aria-hidden />
-            {finalText ? t("resume") : t("start")}
-          </Button>
-        )}
-        {finalText && !listening && (
-          <Button type="button" variant="outline" size="lg" onClick={reset}>
-            {t("reset")}
-          </Button>
-        )}
-      </div>
+      {/* Live mic — only where the Web Speech API exists. */}
+      {sttSupported && (
+        <div className="flex flex-wrap gap-3">
+          {listening ? (
+            <Button type="button" variant="destructive" size="lg" onClick={stop}>
+              <Square aria-hidden />
+              {t("stop")}
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              variant="accent"
+              size="lg"
+              onClick={start}
+              disabled={transcribing}
+            >
+              <Mic aria-hidden />
+              {finalText ? t("resume") : t("start")}
+            </Button>
+          )}
+          {finalText && !listening && (
+            <Button type="button" variant="outline" size="lg" onClick={reset}>
+              {t("reset")}
+            </Button>
+          )}
+        </div>
+      )}
+
+      {/* Upload a recording — on-device Whisper; works without live STT too. */}
+      {uploadSection}
 
       {(fullText.length > 0 || listening) && (
         <PressureMeter

@@ -1,10 +1,9 @@
 "use client";
 
-import { Volume2 } from "lucide-react";
+import { Square, Volume2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { speak } from "@/lib/speech/tts";
-import { useTtsAvailable } from "@/lib/speech/useTts";
+import { useSpeech, useTtsAvailable } from "@/lib/speech/useTts";
 
 /*
  * 60-second audio micro-lessons (spec §5.6). Content is TTS-read at runtime in
@@ -17,6 +16,7 @@ export function LessonPlayer() {
   const t = useTranslations("lessons");
   const locale = useLocale();
   const canSpeak = useTtsAvailable(locale);
+  const { speakingId, speak, stop } = useSpeech();
 
   return (
     <section className="flex flex-col gap-3">
@@ -36,10 +36,20 @@ export function LessonPlayer() {
                 type="button"
                 variant="outline"
                 className="self-start"
-                onClick={() => speak(`${t(`${id}.title`)}. ${t(`${id}.body`)}`, locale)}
+                aria-pressed={speakingId === id}
+                onClick={
+                  speakingId === id
+                    ? stop
+                    : () =>
+                        speak(`${t(`${id}.title`)}. ${t(`${id}.body`)}`, locale, id)
+                }
               >
-                <Volume2 aria-hidden />
-                {t("listen")}
+                {speakingId === id ? (
+                  <Square aria-hidden />
+                ) : (
+                  <Volume2 aria-hidden />
+                )}
+                {speakingId === id ? t("stop") : t("listen")}
               </Button>
             )}
           </li>

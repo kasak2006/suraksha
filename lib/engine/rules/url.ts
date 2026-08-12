@@ -1,4 +1,5 @@
 import legitDomains from "../../../data/legit-domains.json";
+import { isBlockedHost, isBlockedUrl } from "../blocklist";
 import { levenshtein } from "../text";
 import type { EvidenceSpan, Rule, RuleContext } from "../types";
 import { findAll } from "./helpers";
@@ -61,6 +62,26 @@ function isLookalike(hostname: string, registrable: string): boolean {
 }
 
 export const urlRules: readonly Rule[] = [
+  urlRule(
+    {
+      id: "url.known-phishing",
+      category: "url",
+      weight: 90,
+      reasonKey: "reasons.url.knownPhishing",
+      override: "danger",
+    },
+    // A confirmed report outranks every structural guess below, so this leads
+    // the "Why" list. The allowlist guard means a compromised path on a genuine
+    // bank/govt domain never blanket-flags that domain as phishing.
+    (ctx) =>
+      ctx.urls
+        .filter(
+          (u) =>
+            !LEGIT_DOMAINS.has(u.registrable) &&
+            (isBlockedUrl(u.span.text) || isBlockedHost(u.hostname)),
+        )
+        .map((u) => u.span),
+  ),
   urlRule(
     {
       id: "url.apk-download",

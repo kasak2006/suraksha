@@ -1,0 +1,14 @@
+{
+  "_comment": "Tier-1 known-phishing snapshot, checked entirely on-device (lib/engine/blocklist.ts). Regenerate with `npm run blocklist:build`, which merges data/blocklist.seed.json with public feeds (URLhaus, OpenPhish). This committed copy = seed only, so the app ships with a working blocklist even if the build is never run. `hosts` block a whole site; `urls` block one path.",
+  "generatedAt": "2026-08-12T00:00:00.000Z",
+  "sources": ["seed"],
+  "hosts": [
+    "paytm-cashback-offer.top",
+    "rbi-refund-portal.online",
+    "secure-sbi-kyc.xyz"
+  ],
+  "urls": [
+    "icici-kyc-update.click/verify.php",
+    "login-hdfc.info/netbanking/verify"
+  ]
+}

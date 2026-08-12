@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Loader2, Sparkles, Volume2 } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles, Square, Volume2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -13,8 +13,7 @@ import { Button } from "@/components/ui/button";
 import { analyze, analyzeWithModel, type AnalysisResult } from "@/lib/engine";
 import { decodeMessage } from "@/lib/check-link";
 import { Link } from "@/lib/i18n/navigation";
-import { cancelSpeech, speak } from "@/lib/speech/tts";
-import { useTtsAvailable } from "@/lib/speech/useTts";
+import { useSpeech, useTtsAvailable } from "@/lib/speech/useTts";
 
 export function CheckClient() {
   const t = useTranslations("check");
@@ -31,14 +30,16 @@ export function CheckClient() {
     useState<AnalysisResult["modelState"]>("unloaded");
   // Voice UI appears only when a voice for this language is actually installed.
   const canSpeak = useTtsAvailable(locale);
+  const { speakingId, speak, stop } = useSpeech();
+  const speaking = speakingId !== null;
 
   const spokenVerdict = `${t(`bands.${rulesResult.band}`)}. ${t(`verdictLine.${rulesResult.band}`)}`;
 
-  // Auto-read the verdict aloud (§5.2) — critical for low-literacy users.
+  // Auto-read the verdict aloud (§5.2) — critical for low-literacy users. The
+  // Listen button below toggles to Stop so it can be silenced at any time.
   useEffect(() => {
     if (!canSpeak || message.trim().length === 0) return;
     speak(spokenVerdict, locale);
-    return () => cancelSpeech();
     // Read once per message; spokenVerdict/locale are derived from it.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canSpeak, message]);
@@ -113,10 +114,11 @@ export function CheckClient() {
           type="button"
           variant="outline"
           className="self-start"
-          onClick={() => speak(spokenVerdict, locale)}
+          aria-pressed={speaking}
+          onClick={speaking ? stop : () => speak(spokenVerdict, locale)}
         >
-          <Volume2 aria-hidden />
-          {t("listen")}
+          {speaking ? <Square aria-hidden /> : <Volume2 aria-hidden />}
+          {speaking ? t("stop") : t("listen")}
         </Button>
       )}
 

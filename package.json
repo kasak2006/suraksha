@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "corpus:validate": "tsx scripts/validate-corpus.ts",
-    "corpus:features": "tsx scripts/score-corpus.ts"
+    "corpus:features": "tsx scripts/score-corpus.ts",
+    "blocklist:build": "tsx scripts/build-blocklist.ts"
   },
   "dependencies": {
     "@huggingface/transformers": "^3.7.6",

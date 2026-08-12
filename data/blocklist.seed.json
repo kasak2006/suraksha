@@ -1,0 +1,12 @@
+{
+  "_comment": "Stable seed for the Tier-1 known-phishing blocklist. These illustrative sample entries are always merged in by `npm run blocklist:build` and are relied on by tests/engine/blocklist.test.ts. Real confirmed URLs are added on top from public feeds (URLhaus, OpenPhish). `hosts` block a whole site; `urls` block one path.",
+  "hosts": [
+    "secure-sbi-kyc.xyz",
+    "paytm-cashback-offer.top",
+    "rbi-refund-portal.online"
+  ],
+  "urls": [
+    "login-hdfc.info/netbanking/verify",
+    "icici-kyc-update.click/verify.php"
+  ]
+}

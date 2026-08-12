@@ -87,6 +87,7 @@
       "unusualVpa": "The UPI ID uses an uncommon provider. Check the receiver's name in your UPI app before paying anything."
     },
     "url": {
+      "knownPhishing": "This exact link has been reported as a scam or phishing site by security services. Do not open it.",
       "apkDownload": "It links to an app file (APK/EXE) download. Apps from links can watch your screen and empty your account — install only from the Play Store.",
       "lookalikeDomain": "The website address imitates a real bank or service, but it is not the official address.",
       "punycodeHomoglyph": "The link uses look-alike characters to disguise a fake website address.",
@@ -318,6 +319,7 @@
   "lessons": {
     "heading": "60-second lessons",
     "listen": "Listen",
+    "stop": "Stop",
     "otp": {
       "title": "What is an OTP?",
       "body": "An OTP is a one-time password sent to your phone to approve something YOU started. No bank, company or officer ever needs your OTP. Anyone who asks for it is trying to steal from you."
@@ -341,6 +343,18 @@
     "resume": "Resume listening",
     "stop": "Stop",
     "reset": "Clear",
+    "uploadTitle": "Have a recording of the call?",
+    "uploadHint": "Upload an audio file. It is transcribed on your device and checked — nothing is sent to any server.",
+    "upload": "Upload a recording",
+    "transcribing": "Transcribing…",
+    "transcribingHint": "Reading the audio on your device…",
+    "downloadingModel": "Downloading the transcription model once ({percent}%) — after this it works offline.",
+    "errors": {
+      "unsupported": "This browser can't transcribe audio here. Paste what was said into Check instead.",
+      "decode": "Couldn't read that audio file. Try a WAV or MP3 recording, or paste what was said into Check.",
+      "model": "Couldn't load the transcription model. Connect to the internet for the first use, then try again.",
+      "empty": "No clear speech was found in that recording. Try again somewhere quieter, or paste what was said into Check."
+    },
     "checkFullMessage": "Check the full transcript",
     "meterLabel": "Pressure meter",
     "noTacticsYet": "No pressure tactics yet.",

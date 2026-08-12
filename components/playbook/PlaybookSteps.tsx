@@ -1,12 +1,11 @@
 "use client";
 
-import { ExternalLink, Phone, Volume2 } from "lucide-react";
+import { ExternalLink, Phone, Square, Volume2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { Playbook } from "@/lib/engine/playbooks";
-import { speak } from "@/lib/speech/tts";
-import { useTtsAvailable } from "@/lib/speech/useTts";
+import { useSpeech, useTtsAvailable } from "@/lib/speech/useTts";
 
 /*
  * The guided response checklist (spec §5.5). Three ordered buckets; each step is
@@ -45,6 +44,8 @@ export function PlaybookSteps({ playbook }: { playbook: Playbook }) {
   const t = useTranslations("playbook");
   const locale = useLocale();
   const canSpeak = useTtsAvailable(locale);
+  const { speakingId, speak, stop } = useSpeech();
+  const speaking = speakingId !== null;
 
   function readAllAloud() {
     const all = BUCKETS.flatMap((bucket) => [
@@ -61,10 +62,11 @@ export function PlaybookSteps({ playbook }: { playbook: Playbook }) {
           type="button"
           variant="outline"
           className="self-start"
-          onClick={readAllAloud}
+          aria-pressed={speaking}
+          onClick={speaking ? stop : readAllAloud}
         >
-          <Volume2 aria-hidden />
-          {t("readAloud")}
+          {speaking ? <Square aria-hidden /> : <Volume2 aria-hidden />}
+          {speaking ? t("stop") : t("readAloud")}
         </Button>
       )}
 

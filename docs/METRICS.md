@@ -135,8 +135,8 @@ Three misclassified rows in the 44-row test set:
   types — not a random sample of real message traffic, so precision/recall here
   won't directly transfer to field prevalence.
 - **Adversarial evasion.** A determined scammer can paraphrase around both the
-  rules and a small embedding model. The tactic engine (Phase 3) and a growing
-  corpus are the mitigations.
+  rules and a small embedding model. The live tactic engine (which scores the
+  manipulation grammar, not the wording) and a growing corpus are the mitigations.
 - **Fusion.** All three components are live — neural (0.45), rules (0.40), and
   the real tactic-peak (0.15) — so the fused score spans the full 0–100 range.
   Hard overrides (explicit OTP/PIN ask, APK link) floor to DANGER regardless of
