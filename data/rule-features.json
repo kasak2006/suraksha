@@ -1098,5 +1098,665 @@
     "urgency": 0,
     "reward": 0,
     "textual": 0
+  },
+  "hi-0001": {
+    "credential": 0,
+    "upi": 0,
+    "url": 100,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0002": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0003": {
+    "credential": 85,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 45,
+    "textual": 0
+  },
+  "hi-0004": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 70,
+    "urgency": 85,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0005": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 65,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0006": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0007": {
+    "credential": 85,
+    "upi": 85,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0008": {
+    "credential": 0,
+    "upi": 50,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0009": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0010": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0011": {
+    "credential": 85,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0012": {
+    "credential": 0,
+    "upi": 0,
+    "url": 35,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 45,
+    "textual": 0
+  },
+  "hi-0013": {
+    "credential": 0,
+    "upi": 0,
+    "url": 100,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0014": {
+    "credential": 0,
+    "upi": 100,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0015": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0016": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0017": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0018": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0019": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0020": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0021": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0022": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0023": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0024": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0025": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0026": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0027": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0028": {
+    "credential": 85,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0029": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "hi-0030": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0001": {
+    "credential": 0,
+    "upi": 0,
+    "url": 100,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0002": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0003": {
+    "credential": 85,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 45,
+    "textual": 0
+  },
+  "gu-0004": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 70,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0005": {
+    "credential": 0,
+    "upi": 85,
+    "url": 0,
+    "loan": 65,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0006": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0007": {
+    "credential": 0,
+    "upi": 85,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0008": {
+    "credential": 0,
+    "upi": 50,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0009": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0010": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0011": {
+    "credential": 85,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0012": {
+    "credential": 0,
+    "upi": 0,
+    "url": 35,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 45,
+    "textual": 0
+  },
+  "gu-0013": {
+    "credential": 0,
+    "upi": 0,
+    "url": 100,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0014": {
+    "credential": 0,
+    "upi": 100,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0015": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0016": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0017": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0018": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0019": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0020": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0021": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0022": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0023": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0024": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 30,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0025": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0026": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0027": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0028": {
+    "credential": 85,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0029": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0030": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0031": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 65,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0032": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0033": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0034": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0035": {
+    "credential": 0,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
+  },
+  "gu-0036": {
+    "credential": 85,
+    "upi": 0,
+    "url": 0,
+    "loan": 0,
+    "impersonation": 0,
+    "urgency": 0,
+    "reward": 0,
+    "textual": 0
   }
 }
